@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SIMU</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/main.css?v=2.0" />
+  </head>
+  <body>
+    <header>
+      <div class="header__contenedor">
+        <a class="header__btn-home" href="panel.html">
+          <img src="assets/casa.png" />
+        </a>
+
+        <button class="header__btn-user" id="btn_user">
+          <img src="assets/user.svg" alt="" />
+        </button>
+      </div>
+
+      <div class="user_info">
+        <div class="user_info__primary">
+          <button class="header__btn-user" type="button">
+            <img src="assets/user.svg" alt="" />
+          </button>
+
+          <a class="user_info__name" href="#">user29874</a>
+        </div>
+
+        <div class="user_info__secondary">
+          <a href="usuario.html">Editar perfil</a>
+          <a href="index.html">Cerrar Sesión</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="contenedor_global">
+      <div class="simulador" id="simulador">
+        <canvas id="canvas_1" width="1980" height="1080"></canvas>
+        <div class="powersupply">
+          <div class="powersupply_info">
+            POWER SUPPLY
+            <img src="assets/energy.png" alt="">
+          </div>
+          <div class="powersupply_conector">
+
+          </div>
+        </div>
+
+        <!-- BTN Pantalla completa -->
+        <button type="button" id="btn_fullscreen">
+          <img src="assets/fullscreen.png" alt="" />
+        </button>
+
+        <!-- Opciones -->
+        <div class="simulador__opciones">
+
+          <a href="dps450.html" type="button">
+            <img src="assets/reiniciar.png" alt="" />
+          </a>
+
+          <button type="button">
+            <img src="assets/tijera.png" alt="" />
+          </button>
+
+          <button class="tuberias_btn" onclick="agregar_tuberias()" type="button">
+            <img src="assets/tuberia.png" alt="" />
+          </button>
+
+          <a href="panel.html" type="button">
+            <img src="assets/salir.png" alt="" />
+          </a>
+        </div>
+
+
+        <!-- Simulador -->
+        <div class="simulador__contenedor">
+          <div class="simulador__fw">
+            <div class="simulador__bordes">
+              <div class="pitot pitot_aux">
+                <img id="conector_1" src="assets/conector.svg" alt="">
+              </div>
+
+              <div class="pitot pitot_fo">
+                <img src="assets/conector.svg" alt="">
+              </div>
+
+              <div class="pitot-reverse pitot_cap">
+                <img src="assets/conector.svg" alt="">
+              </div>
+
+              <div class="conectores_estaticos conectores_derecha">
+                <img src="assets/conector_2.svg">
+                <img src="assets/conector_2.svg">
+                <img src="assets/conector_2.svg">
+              </div>
+
+              <div class="conectores_estaticos conectores_izquierda">
+                <img src="assets/conector_2.svg">
+                <img src="assets/conector_2.svg">
+                <img src="assets/conector_2.svg">
+              </div>
+
+              <div class="simulador__dispositivo">
+                <div id="fondo_blanco">
+                  <div class="simulador_tornillo" id="tornillo-1">
+                    <img src="assets/screw.svg" alt="" />
+                  </div>
+                  <div class="simulador_tornillo" id="tornillo-2">
+                    <img src="assets/screw.svg" alt="" />
+                  </div>
+                  <div class="simulador_tornillo" id="tornillo-3">
+                    <img src="assets/screw.svg" alt="" />
+                  </div>
+                  <div class="simulador_tornillo" id="tornillo-4">
+                    <img src="assets/screw.svg" alt="" />
+                  </div>
+                  <div class="simulador_tornillo" id="tornillo-5">
+                    <img src="assets/screw.svg" alt="" />
+                  </div>
+                  <div class="simulador_tornillo" id="tornillo-6">
+                    <img src="assets/screw.svg" alt="" />
+                  </div>
+                  <div class="simulador_tornillo" id="tornillo-7">
+                    <img src="assets/screw.svg" alt="" />
+                  </div>
+                  <div class="simulador_tornillo" id="tornillo-8">
+                    <img src="assets/screw.svg" alt="" />
+                  </div>
+                  <div id="barra-1"></div>
+                  <div id="barra-2"></div>
+                  <div class="simulador__tabla">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th class="tabla__titulo-1">GROUND</th>
+                          <th class="tabla__titulo-2">120 VAC / 60 Hz</th>
+                          <th class="tabla__titulo-3">ON</th>
+                          <th class="tabla__titulo-4">CALIBRATE</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="tabla__celdas">
+                          <td>
+                            <div class="contenedorinputs-mod"> 
+                              <div class="input__small"></div>
+                            </div>                        
+                          </td>
+                          <td>
+                            <div class="contenedorinputs">
+                              <div class="input__small" id="power_1"></div>
+                              <div class="input__small" id="power_2"></div>
+                              <div class="input__big" id="power_3"></div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="contenedorinputs">
+                              <div class="input__small" id="power_4"></div>
+                              <div class="input__small-rojo" id="power_5"></div>
+                            </div>
+                          </td>
+                          <td>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="simulador__funciones">
+                    <div class="funciones__contenedor">
+  
+                      <div class="pantalla">
+                        <div class="pantalla__contenido disposicion-1 pantalla_apagada">
+                          <div class="contenido__info infoc-1">
+                            <div class="info__dialog">
+                              <p class="info__dialog_tittle">ALT <span>Leak Measure</span></p>
+                              <div class="info__dialog_content">
+                                <p id="pantalla_ALT">0</p>
+                                <span>ft</span>
+                              </div>
+                            </div>
+                            <div class="info__dialog">
+                              <p class="info__dialog_tittle">ROC <span>Leak Measure</span></p>
+                              <div class="info__dialog_content">
+                                <p id="pantalla_ROC">0</p>
+                                <span>ft/min</span>
+                              </div>
+                            </div>
+                            <div class="info__dialog">
+                              <p class="info__dialog_tittle">CAS <span>Leak Measure</span></p>
+                              <div class="info__dialog_content">
+                                <p id="pantalla_CAS">0.0</p>
+                                <span>kts</span>
+                              </div>
+                            </div>
+                            <div class="info__dialog">
+                              <p class="info__dialog_tittle">RtCAS <span>Leak Measure</span></p>
+                              <div class="info__dialog_content">
+                                <p id="pantalla_RATE">0.0</p>
+                                <span>kts/min</span>
+                              </div>
+                            </div>
+                            <div class="info__dialog">
+                              <p class="info__dialog_tittle">LEAK MEASURE MODE</p>
+                              <div class="info__dialog_content">
+                                <p id="testing_status">Altitude Correction </p>
+                                <span id="testing_time">0</span>
+                                <span id="testing_no">ft</span>
+                              </div>
+                            </div>
+                          </div>
+  
+                          <div class="contenido__info infoc-2 pantalla_apagada">
+                            <p>Active Limit Set : <span id="active_limit_box"></span></p>
+                            <p>Available Preset Limits</p>
+                            <hr>
+                            <p class="limits">MAX</p>
+                            <p class="limits">STANDARD</p>
+                            <p class="limits">CIVIL</p>
+                            <p class="pt-2">Available Preset Limits</p>
+                            <hr>
+                            <p>USER 1</p>
+                          </div>
+  
+                          <div class="contenido__info infoc-3 pantalla_apagada">
+                            <div class="info__dialog">
+                              <p class="info__dialog_tittle"> <span class="nombre_variable">ALT</span> <span class="info__dialog_tittle-sub">Control Aim = <span class="valor_variable info__dialog_tittle-sub"></span></span></p>
+                              <div class="info__dialog_content">
+                                <p class="pantalla_variable">649</p>
+                                <span class="unidades_variable">ft</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="contenido__opciones">
+                            <div class="opciones__dialog-title">
+                              Main Menu
+                            </div>
+                            <div class="opciones__dialog">Rate Timer</div>
+                            <div class="opciones__dialog">Units</div>
+                            <div class="opciones__dialog">EPR</div>                            
+                            <div class="opciones__dialog">
+                              
+                            </div>
+                            <div class="opciones__dialog">
+                              
+                            </div>
+                            <div class="opciones__dialog">
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+  
+                      <div class="botonera botonera-1">
+                        <div class="simulador__btn simulador__btn-negro" id="ALT">
+ALT
+Ps
+                        </div>
+                        <div class="simulador__btn simulador__btn-gris" id="SPEED">
+SPEED
+Qc
+                        </div>
+                        <div class="simulador__btn simulador__btn-gris" id="MATCH">
+MACH
+PT
+                        </div>
+                        <div class="simulador__btn simulador__btn-negro" id="ROC">
+ROC
+RATE Ps
+                        </div>
+                        <div class="simulador__btn simulador__btn-amarillo">
+GROUND
+                        </div>
+                        <div class="simulador__btn simulador__btn-gris" id="RATE">
+RATE
+                        </div>
+                        <div class="simulador__btn simulador__btn-amarillo-especial">
+LEAK
+<span>MEASURE</span>
+CONTROL
+                        </div>
+                        <div class="simulador__btn simulador__btn-amarillo">
+HELP
+                        </div>
+                        <div class="simulador__btn simulador__btn-amarillo" id="setup_btn">
+SETUP
+                        </div>
+                      </div>
+  
+                      <div class="botonera botonera-2">
+                        <div class="simulador__btn-numero simulador__btn-azul" id="btn_7">
+7
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul" id="btn_8">
+8
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul" id="btn_9">
+9
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul-especial" id="btn_clear">
+CLEAR
+QUIT
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul" id="btn_4">
+4
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul" id="btn_5">
+5
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul" id="btn_6">
+6
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-transparente">
+ABORT
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul" id="btn_1">
+1
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul" id="btn_2">
+2
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul" id="btn_3">
+3
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul" id="delete_btn">
+DELETE
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul">
+<u>000</u>
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul" id="btn_0">
+0
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul" id="btn_decimal">
+.
+                        </div>
+                        <div class="simulador__btn-numero simulador__btn-azul" id="enter_btn">
+ENTER
+                        </div>
+                      </div>
+  
+                      <div class="botonera botonera-3">
+                        <div class="simulador__btn-fs simulador__btn-azul" id="f1">
+F1
+                        </div>
+                        <div class="simulador__btn-fs simulador__btn-azul" id="f2">
+F2
+                        </div>
+                        <div class="simulador__btn-fs simulador__btn-azul" id="f3">
+F3
+                        </div>
+                        <div class="simulador__btn-fs simulador__btn-azul">
+F4
+                        </div>
+                        <div class="simulador__btn-fs simulador__btn-azul">
+F5
+                        </div>
+                        <div class="simulador__btn-fs simulador__btn-azul">
+F6
+                        </div>
+                      </div>
+  
+                      <div class="dibujo_pitot">
+                        <div class="contenedor_dibujo">
+                          <img src="assets/ac_dps_sp.svg">
+                          <div class="circulo-rojo"></div>
+                          <div class="circulo-celeste" id="circulo"></div>
+                        </div>
+                      </div>
+
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="avion">
+              <div class="avion__info" id="ac__info-1">
+                Pt
+                <div class="input__small"></div>
+              </div>
+              <div class="avion__info" id="ac__info-2">
+                Ps
+                <div class="input__small input_Ps" id="inputPs"></div>
+              </div>
+              <img class="avion__imagen" src="assets/ac.svg" alt="" />
+            </div> -->
+          </div>
+        </div>
+
+        <!-- Alertas -->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-config='{"delay":5000}'>
+            <div class="toast-header">
+              <strong class="me-auto">SIMULADOR</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              Dispositivo encendido
+            </div>
+          </div>
+
+          <div id="liveToast2" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-config='{"delay":1000}'>
+            <div class="toast-header">
+              <strong class="me-auto">SIMULADOR</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              Dispositivo apagado
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/simulador.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const toastTrigger = document.getElementById('power_4')
+      const toastLiveExample = document.getElementById('liveToast')
+      const toastLiveExample2 = document.getElementById('liveToast2')
+
+      if (toastTrigger) {
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        const toastBootstrap2 = bootstrap.Toast.getOrCreateInstance(toastLiveExample2)
+        toastTrigger.addEventListener('click', () => {
+          if (estado == undefined || estado == "OFF") {
+            toastBootstrap2.show()
+          } else if (estado == "ON") {
+            toastBootstrap.show()
+          }
+        })
+      }
+    </script>
+  </body>
+</html>

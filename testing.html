@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Testing cuerdas</title>
+  </head>
+  <body>
+    <canvas
+      id="canvas"
+      width="400"
+      height="400"
+      style="border: 1px solid black"
+    ></canvas>
+    <script>
+      // Obtener el elemento canvas y el contexto 2D
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      // Definir las propiedades de los cuadrados
+      const size = 100; // Tamaño de los lados
+      const color = "rgba(225,225,225,0.5)"; // Color de relleno
+
+      // Calcular las coordenadas de los cuadrados
+      const x1 = 0; // Coordenada x del primer cuadrado
+      const y1 = 0; // Coordenada y de ambos cuadrados
+      const x2 = 200; // Coordenada x del segundo cuadrado
+      const y2 = 100; // Coordenada x del segundo cuadrado
+
+      // Dibujar los cuadrados en el canvas
+      ctx.fillStyle = color;
+      ctx.fillRect(x1, y1, size, size);
+      ctx.fillRect(x2, y2, size, size);
+
+      // Definir las variables para la línea
+      let lineStarted = false; // Indica si se ha iniciado el dibujo de la línea
+      let lineX1, lineY1, lineX2, lineY2; // Coordenadas de los extremos de la línea
+
+      // Función para comprobar si el punto (x, y) está dentro del cuadrado (x0, y0, size)
+      function isInsideSquare(x, y, x0, y0, size) {
+        return x >= x0 && x <= x0 + size && y >= y0 && y <= y0 + size;
+      }
+
+      // Función para dibujar la línea en el canvas
+      function drawLine() {
+        // Borrar el canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Redibujar los cuadrados
+        ctx.fillStyle = color;
+        ctx.fillRect(x1, y1, size, size);
+        ctx.fillRect(x2, y2, size, size);
+
+        // Dibujar la línea
+        ctx.beginPath();
+        ctx.moveTo(lineX1, lineY1);
+        ctx.lineTo(lineX2, lineY2);
+        ctx.stroke();
+      }
+
+      // Añadir un evento de click al canvas
+      canvas.addEventListener("click", function (e) {
+        // Obtener las coordenadas del ratón
+        let mouseX = e.offsetX;
+        let mouseY = e.offsetY;
+
+        // Comprobar si se ha hecho click en alguno de los cuadrados
+        if (isInsideSquare(mouseX, mouseY, x1, y1, size)) {
+          // Si se ha hecho click en el primer cuadrado, iniciar la línea
+          lineStarted = true;
+          lineX1 = x1 + size / 2;
+          lineY1 = y1 + size / 2;
+        } else if (isInsideSquare(mouseX, mouseY, x2, y2, size)) {
+          // Si se ha hecho click en el segundo cuadrado, terminar la línea
+          lineStarted = false;
+          lineX2 = x2 + size / 2;
+          lineY2 = y2 + size / 2;
+          drawLine();
+        }
+      });
+
+      // Añadir un evento de movimiento al canvas
+      canvas.addEventListener("mousemove", function (e) {
+        // Obtener las coordenadas del ratón
+        let mouseX = e.offsetX;
+        let mouseY = e.offsetY;
+
+        // Si se ha iniciado la línea, actualizar el segundo punto y dibujar la línea
+        if (lineStarted) {
+          lineX2 = mouseX;
+          lineY2 = mouseY;
+          drawLine();
+        }
+      });
+    </script>
+  </body>
+</html>
