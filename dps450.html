@@ -175,6 +175,10 @@
                     <div class="funciones__contenedor">
   
                       <div class="pantalla">
+                        <div class="modal">
+                          <p class="Loading">Loading...</p>
+                        <span class="loader"></span>         
+                        </div>
                         <div class="pantalla__contenido disposicion-1 pantalla_apagada">
                           <div class="contenido__info infoc-1">
                             <div class="info__dialog">
@@ -444,3 +448,58 @@ F6
     </script>
   </body>
 </html>
+<script>
+  const modal = document.querySelector('.modal');
+const btnAbrir = document.getElementById('power_4');
+const btnCerrar = document.querySelector('power_4'); // Botón de cerrar (opcional)
+
+// Función para abrir el modal
+function power_4() {
+  modal.classList.add('mostrar');
+}
+
+// Función para cerrar el modal
+function cerrarModal() {
+  modal.classList.remove('mostrar');
+}
+
+// Eventos de click
+btnAbrir.addEventListener('click', power_4);
+btnCerrar.addEventListener('click', power_4); // Evento para el botón de cerrar
+
+// Opcional: cerrar el modal al hacer clic fuera del contenido
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+      cerrarModal();
+  }
+});
+
+
+
+// Función para abrir el modal
+function power_4() {
+  modal.classList.add('mostrar');
+
+  // Cerrar el modal después de 5 segundos
+  setTimeout(() => {
+      cerrarModal();
+  }, 10000); // 5000 milisegundos = 5 segundos
+}
+
+// Función para cerrar el modal
+function cerrarModal() {
+  modal.classList.remove('mostrar');
+}
+
+// Eventos de click
+btnAbrir.addEventListener('click', power_4);
+btnCerrar.addEventListener('click', cerrarModal); // Evento para el botón de cerrar
+
+// Opcional: cerrar el modal al hacer clic fuera del contenido
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+      cerrarModal();
+  }
+});
+
+</script>
